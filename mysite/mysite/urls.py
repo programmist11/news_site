@@ -14,8 +14,9 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-    import debug_toolbar
     import mimetypes
+
+    import debug_toolbar
 
     mimetypes.add_type("application/javascript", ".js", True)
     urlpatterns = [

@@ -1,10 +1,11 @@
+from captcha.fields import CaptchaField, CaptchaTextInput
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import (DateTimeInput, FileInput, ModelForm, Select,
                           Textarea, TextInput)
 from django_summernote.widgets import SummernoteInplaceWidget, SummernoteWidget
-from captcha.fields import CaptchaField ,CaptchaTextInput
+
 from .models import Category, News
 
 

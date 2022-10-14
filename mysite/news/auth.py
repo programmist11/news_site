@@ -1,5 +1,6 @@
 import random
 from string import ascii_letters
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
@@ -12,7 +13,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import (CodeVailForm, EmailValidForm, PasswordValidForm,
                     RegistrForm, loginForm)
 from .models import Account, Category, Ip, Likes, News
-
 
 
 def validate(nickname):
