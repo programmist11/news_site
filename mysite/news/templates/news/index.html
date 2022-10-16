@@ -81,14 +81,14 @@
 <div class="row">
   {%for item in news%}
     <div class="col-sm-4">
-    <div class="card mt-3" style="background-color: #A9A9A9;">
+    <div class="card mt-3" style="background-color: #A9A9A9; max-height:600px">
       <div class="card-body">
           <div class="media">
               <div class="text-center"><h5 class="card-title text-dark">{{item.title}}</h5></div>
               {%if item.photo%}
-              <img src="{{item.photo.url}}" alt='' width="320" height="300" class="mr-3">
+              <img src="{{item.photo.url}}" alt='' max-width="330" width="90%" height="90%" max-height="320px" class="mr-3">
               {% else %}
-              <img src='https://picsum.photos/id/237/320/300' alt=''>
+              <img src='https://nos.twnsnd.co/image/697559999966314497' alt=''>
               {% endif %}
               <div class="media-body">
                   <p class="card-text text-dark">{{item.title_content}}</p>

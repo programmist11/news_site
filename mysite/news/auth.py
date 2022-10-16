@@ -1,5 +1,6 @@
 import random
 from string import ascii_letters
+from .password_validation import validate_password
 
 from django.conf import settings
 from django.contrib import messages
@@ -33,9 +34,12 @@ def registr(request):
         if User.objects.filter(username=username):
             messages.error(request, "Пользователь с таким именем "
                                     "пользователя уже существует ")
-        elif form.is_valid():
+        if password1 != password2:
+            messages.error(request, "Пароли отличаются")
+
+        if form.is_valid():
+            validate_password(password1)
             message = generate_code()
-            #login(request, user)#если форма запонена верно войти сразу в этот акк
             send_mail('код подтверждения',
                       message,
                       settings.EMAIL_HOST_USER,
@@ -49,16 +53,7 @@ def registr(request):
                                       f'сообщение с кодом для подтверждения')
             return redirect('/validate/'+str(user.id))
         else:
-            messages.error(request, "Ошибка регистрации")
-            if len(password1) < 8:
-                messages.error(request, "Пароль должен быть больше 7 символов")
-            elif password1 != password2:
-                messages.error(request, "Пароли отличаются")
-            #elif not validate(username):
-            #    messages.error(request, "Имя пользователя должно "
-            #                            "состоять из латинских букв")
-            else:
-                messages.error(request, "Неверный код с картинки")
+           messages.error(request, "Неверный код с картинки")
     else:
         form = RegistrForm()
     return render(request, 'news/registr.html', {"form": form})

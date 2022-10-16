@@ -27,11 +27,11 @@ def search(request):
 
 
 def index(request):
-    news = cache.get_or_set("news", News.objects.select_related('autor').all(),100)
-    all_category = cache.get_or_set("all_category",Category.objects.all(),100)
+    news = cache.get_or_set("news", News.objects.select_related('autor').all(), 0)
+    all_category = cache.get_or_set("all_category", Category.objects.all(), 100)
 
     paginator = Paginator(news, 5)
-    page_number = request.GET.get('page',1)
+    page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'news/index.html',
@@ -74,17 +74,16 @@ def detail(request ,pk):
 
 
 def category(request, category_id):
-    all_category = cache.get_or_set("all_category",Category.objects.all(),100)
+    all_category = cache.get_or_set("all_category", Category.objects.all(),100)
     category = get_object_or_404(Category, pk=category_id)
     news = category.news_set.select_related('autor').all()
-
 
     paginator = Paginator(news, 5)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     return render(request, 'news/category.html',
                   {
-    "news" : page_obj,
+    "news": page_obj,
     "category": category,
     "all_category": all_category
                   })
